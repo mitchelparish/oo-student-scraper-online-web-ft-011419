@@ -4,6 +4,8 @@ require 'pry'
 
 class Scraper
 
+  @@Scottsdale_AZ = {}
+
   def self.scrape_index_page(index_url)
     html = Nokogiri::HTML(open(index_url))
     html.css('.student-card').collect {|student|
@@ -13,7 +15,10 @@ class Scraper
       profile_url: student.css('a').attribute('href').value
       }
     }
+  
   end
+
+  binding.pry
 
   def self.scrape_profile_page(profile_url)
     html = Nokogiri::HTML(open(profile_url))
